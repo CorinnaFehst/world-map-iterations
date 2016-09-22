@@ -1,3 +1,5 @@
+## 03 update to es2015, update code style
+
 convert to [ES2015](https://babeljs.io/docs/learn-es2015/) with [lebab](https://github.com/lebab/lebab)
 
 ```shell

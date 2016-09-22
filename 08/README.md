@@ -1,1 +1,3 @@
-ckmeans cluster max breaks
+## 08 ckmeans cluster max breaks
+
+in this iteration, we use the [ckmeans](http://simplestatistics.org/docs/#ckmeans) algorithm from the [simple-statistics](http://simplestatistics.org/) package to cluster our data. we pick the **maximum** value of each cluster as a break.  we then use these breaks with a [quantile](https://github.com/d3/d3-scale/blob/master/README.md#quantile-scales) scale to map values in the data to colors on the choropleth map.
