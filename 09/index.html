@@ -11,60 +11,60 @@
   .d3-tip {
     line-height: 1.5;
     font-weight: 400;
-    font-family:"avenir next", Arial, sans-serif;
+    font-family:'avenir next', Arial, sans-serif;
     padding: 6px;
     background: rgba(0, 0, 0, 0.6);
     color: #FFA500;
     border-radius: 1px;
     pointer-events: none;
-  }
+    }
 
-  /* Creates a small triangle extender for the tooltip */
-  .d3-tip:after {      
-    box-sizing: border-box;
-    display: inline;
-    font-size: 8px;
-    width: 100%;
-    line-height: 1.5;
-    color: rgba(0, 0, 0, 0.6);
-    position: absolute;
-    pointer-events: none;
-    
-  }
+    /* Creates a small triangle extender for the tooltip */
+    .d3-tip:after {      
+      box-sizing: border-box;
+      display: inline;
+      font-size: 8px;
+      width: 100%;
+      line-height: 1.5;
+      color: rgba(0, 0, 0, 0.6);
+      position: absolute;
+      pointer-events: none;
+      
+    }
 
-  /* Northward tooltips */
-  .d3-tip.n:after {
-    content: "\25BC";
-    margin: -1px 0 0 0;
-    top: 100%;
-    left: 0;
-    text-align: center;
-  }
+    /* Northward tooltips */
+    .d3-tip.n:after {
+      content: '\25BC';
+      margin: -1px 0 0 0;
+      top: 100%;
+      left: 0;
+      text-align: center;
+    }
 
-  /* Eastward tooltips */
-  .d3-tip.e:after {
-    content: "\25C0";
-    margin: -4px 0 0 0;
-    top: 50%;
-    left: -8px;
-  }
+    /* Eastward tooltips */
+    .d3-tip.e:after {
+      content: '\25C0';
+      margin: -4px 0 0 0;
+      top: 50%;
+      left: -8px;
+    }
 
-  /* Southward tooltips */
-  .d3-tip.s:after {
-    content: "\25B2";
-    margin: 0 0 1px 0;
-    top: -8px;
-    left: 0;
-    text-align: center;
-  }
+    /* Southward tooltips */
+    .d3-tip.s:after {
+      content: '\25B2';
+      margin: 0 0 1px 0;
+      top: -8px;
+      left: 0;
+      text-align: center;
+    }
 
-  /* Westward tooltips */
-  .d3-tip.w:after {
-    content: "\25B6";
-    margin: -4px 0 0 -1px;
-    top: 50%;
-    left: 100%;
-  }
+    /* Westward tooltips */
+    .d3-tip.w:after {
+      content: '\25B6';
+      margin: -4px 0 0 -1px;
+      top: 50%;
+      left: 100%;
+    }
 
   /*    
   text{
@@ -84,7 +84,7 @@
 <script src="d3-tip.js"></script>
 <script src='https://unpkg.com/simple-statistics@2.0.0/dist/simple-statistics.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.10.3/babel.min.js'></script>
-<script lang='babel' type='text/babel'>
+<script>
 // configuration
 const colorVariable = 'population';
 const geoIDVariable = 'id';
@@ -96,6 +96,72 @@ const tip = d3.tip()
   .offset([-10, 0])
   .html(d => `<strong>Country: </strong><span class='details'>${d.properties.name}<br></span><strong>Population: </strong><span class='details'>${format(d[colorVariable])}</span>`);
 
+tip.direction(function(d) {
+  if (d.properties.name === 'Antarctica') return 'n';
+  // Americas
+  if (d.properties.name === 'Greenland') return 's';
+  if (d.properties.name === 'Canada') return 'e';
+  if (d.properties.name === 'USA') return 'e';
+  if (d.properties.name === 'Mexico') return 'e';
+  // Europe
+  if (d.properties.name === 'Iceland') return 's';
+  if (d.properties.name === 'Norway') return 's';
+  if (d.properties.name === 'Sweden') return 's';
+  if (d.properties.name === 'Finland') return 's';
+  if (d.properties.name === 'Russia') return 'w';
+  // Asia
+  if (d.properties.name === 'China') return 'w';
+  if (d.properties.name === 'Japan') return 's';
+  // Oceania
+  if (d.properties.name === 'Indonesia') return 'w';
+  if (d.properties.name === 'Papua New Guinea') return 'w';
+  if (d.properties.name === 'Australia') return 'w';
+  if (d.properties.name === 'New Zealand') return 'w';
+  // otherwise if not specified
+  return 'n';
+})
+
+tip.offset(function(d) { // [top, left]
+  if (d.properties.name === 'Antarctica') return [-90, 230];
+  // Americas
+  if (d.properties.name === 'Greenland') return [10, -10];
+  if (d.properties.name === 'Canada') return [25, -35];
+  if (d.properties.name === 'USA') return [35, -15];
+  if (d.properties.name === 'Mexico') return [12, 10];
+  if (d.properties.name === 'Chile') return [0, -15];
+  // Europe
+  if (d.properties.name === 'Iceland') return [15, 0];
+  if (d.properties.name === 'Norway') return [10, -28];
+  if (d.properties.name === 'Sweden') return [10, -8];
+  if (d.properties.name === 'Finland') return [10, 0];
+  if (d.properties.name === 'France') return [-9, 89];
+  if (d.properties.name === 'Italy') return [-8, -6];
+  if (d.properties.name === 'Russia') return [5, 385];
+  // Africa
+  if (d.properties.name === 'Madagascar') return [-10, 10];
+  // Asia
+  if (d.properties.name === 'China') return [-16, -8];
+  if (d.properties.name === 'Mongolia') return [-5, 0];
+  if (d.properties.name === 'Pakistan') return [-10, 13];
+  if (d.properties.name === 'India') return [-11, -24];
+  if (d.properties.name === 'Nepal') return [-8, 1];
+  if (d.properties.name === 'Myanmar') return [-12, 0];
+  if (d.properties.name === 'Laos') return [-12, -8];
+  if (d.properties.name === 'Vietnam') return [-12, -4];
+  if (d.properties.name === 'Japan') return [5, 5];
+  // Oceania
+  if (d.properties.name === 'Indonesia') return [0, -5];
+  if (d.properties.name === 'Papua New Guinea') return [-5, -10];
+  if (d.properties.name === 'Australia') return [-15, 0];
+  if (d.properties.name === 'New Zealand') return [-15, 0];
+  // otherwise if not specified
+  return [-10, 0];
+})
+
+d3.select('body')
+    .style('overflow', 'hidden');
+
+const parentWidth = d3.select('body').node().getBoundingClientRect().width;
 const margin = {top: 0, right: 0, bottom: 0, left: 0};
 const width = 960 - margin.left - margin.right;
 const height = 500 - margin.top - margin.bottom;
