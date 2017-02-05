@@ -122,7 +122,7 @@ tip.direction(function(d) {
 })
 
 tip.offset(function(d) { // [top, left]
-  if (d.properties.name === 'Antarctica') return [-90, 230];
+  if (d.properties.name === 'Antarctica') return [0, 0];
   // Americas
   if (d.properties.name === 'Greenland') return [10, -10];
   if (d.properties.name === 'Canada') return [24, -28];
